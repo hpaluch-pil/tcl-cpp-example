@@ -7,8 +7,9 @@ machine name from `uname(2)` system call.
 
 > WARNING!
 >
-> There are many serious leaks according to `valgrind(1)`.
-> Currently I know no simple way how to avoid them.
+> Valgrind report lot of leaks but ... the threaded version
+> uses pool of per-thread allocated memory - so it is much
+> harder to interpret results...
 
 
 # Setup
@@ -67,8 +68,7 @@ To run example with `valgrind(1)` memory leak detector use:
 make valgrind
 ```
 
-> NOTE: Again - there are *many* memory leaks (why?)
-
+> NOTE: See notice at the beginning of this readme...
 
 # Resources
 
