@@ -18,19 +18,17 @@ UnameMachineCmd(
     int objc,                        /* Number of arguments. */
     Tcl_Obj *const objv[])        /* Argument objects. */
 {
-    Tcl_Obj *objResultPtr;
-
     struct utsname un;
 
     if (uname(&un)){
-    	// TODO: strerror
-        objResultPtr = Tcl_NewStringObj("ERROR calling uname(2)", -1);
+        Tcl_SetObjResult(interp, Tcl_ObjPrintf(
+                      "error calling uname(): %s",
+                      Tcl_PosixError(interp)));
+        return TCL_ERROR;
     } else {
-        objResultPtr = Tcl_NewStringObj(un.machine, -1);
+        Tcl_SetObjResult(interp, Tcl_NewStringObj(un.machine, -1) );
+        return TCL_OK;
     }
-
-    Tcl_SetObjResult(interp, objResultPtr);
-    return TCL_OK;
 }
 
 
