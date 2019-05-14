@@ -8,6 +8,9 @@
 // uname(2)
 #include <sys/utsname.h>
 
+// sysinfo(2) - uptime
+#include <sys/sysinfo.h>
+
 #include <tcl.h>
 
 // custom command uname -m - returns machine name
@@ -31,6 +34,25 @@ UnameMachineCmd(
     }
 }
 
+static int UptimeSecondsCmd(
+	    ClientData dummy,                /* Not used. */
+	    Tcl_Interp *interp,                /* Current interpreter. */
+	    int objc,                        /* Number of arguments. */
+	    Tcl_Obj *const objv[])        /* Argument objects. */
+{
+	struct sysinfo in;
+
+    if (sysinfo(&in)){
+        Tcl_SetObjResult(interp, Tcl_ObjPrintf(
+                      "error calling sysinfo(): %s",
+                      Tcl_PosixError(interp)));
+        return TCL_ERROR;
+    } else {
+        Tcl_SetObjResult(interp, Tcl_NewLongObj(in.uptime) );
+        return TCL_OK;
+    }
+}
+
 
 
 // add custom commands to Tcl
@@ -40,7 +62,9 @@ static int Ex_ExtendTcl (Tcl_Interp *interp) {
 	// Original example is wrong at: https://wiki.tcl-lang.org/page/How+to+embed+Tcl+in+C+applications
 	Tcl_CreateObjCommand(
 	        interp, "::ex::uname_machine", UnameMachineCmd, NULL, NULL);
-    return TCL_OK;
+	Tcl_CreateObjCommand(
+	        interp, "::ex::uptime_seconds", UptimeSecondsCmd, NULL, NULL);
+	return TCL_OK;
 }
 
 
@@ -89,7 +113,7 @@ int main(int argc, char **argv)
 	rc = Ex_RunTcl("puts \"Hello, world on [::ex::uname_machine]!\"");
 
 	if (rc == EXIT_SUCCESS){
-		rc = Ex_RunTcl("puts \"Hello, world2!\"");
+		rc = Ex_RunTcl("puts \"System uptime is [::ex::uptime_seconds] seconds.\"");
 	}
 
 	Tcl_Finalize();

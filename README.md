@@ -45,28 +45,20 @@ To run example just invoke:
 ```bash
 make run
 ```
+
 Following examples are run:
 
-* 1st example:
+```tcl
+puts "Hello, world on [::ex::uname_machine]!"
+puts "System uptime is [::ex::uptime_seconds] seconds."
+```
 
-  ```tcl
-  puts "Hello, world on [::ex::uname_machine]!"
-  ```
+should produce output:
 
-  should produce (using our custom function `::ex::uname_machine`):
-
-  ```
-  Hello, world on x86_64!
-  ```
-
-* 2nd example is obvious:
-
-  ```tcl
-  puts "Hello, world2!"
-  ```
-
-  
-
+```
+Hello, world on x86_64!
+System uptime is 12678 seconds.
+```
 
 
 To run example with `valgrind(1)` memory leak detector use:
