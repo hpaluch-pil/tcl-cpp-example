@@ -5,3 +5,8 @@
 # binaries
 tcl_ex
 *.o
+
+# Eclipse generated files
+.project
+.cproject
+
