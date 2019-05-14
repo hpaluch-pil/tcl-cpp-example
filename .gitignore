@@ -1,0 +1,7 @@
+# vim backup files
+*~
+*.swp
+
+# binaries
+tcl_ex
+*.o
