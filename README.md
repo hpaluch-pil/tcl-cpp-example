@@ -5,11 +5,11 @@ Here is trivial example how to embedd Tcl into your C/C++ program.
 Thre are implemented 2 custom commands available from TCL:
 
 1. Command `::ex::uname_machine` that returns
-   machine name from `uname(2)` system call.
+   machine name from [uname(2)](https://manpages.debian.org/stretch/manpages-dev/uname.2.en.html) system call.
 
 1. Command `::ex::uptime_seconds` that returns
    number of seconds from system start (uptime) from
-   sysinfo(2)` system call.
+   [sysinfo(2)](https://manpages.debian.org/stretch/manpages-dev/sysinfo.2.en.html) system call.
 
 Pleae see also [Embedding LUA into C/C++ program](https://github.com/hpaluch-pil/lua-cpp-example) for comparison.
 
