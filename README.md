@@ -2,8 +2,16 @@
 
 Here is trivial example how to embedd Tcl into your C/C++ program.
 
-There is also new Tcl command `::ex::uname_machine` that returns
-machine name from `uname(2)` system call.
+Thre are implemented 2 custom commands available from TCL:
+
+1. Command `::ex::uname_machine` that returns
+   machine name from `uname(2)` system call.
+
+1. Command `::ex::uptime_seconds` that returns
+   number of seconds from system start (uptime) from
+   sysinfo(2)` system call.
+
+Pleae see also [Embedding LUA into C/C++ program](https://github.com/hpaluch-pil/lua-cpp-example) for comparison.
 
 > WARNING!
 >
@@ -54,7 +62,7 @@ puts "Hello, world on [::ex::uname_machine]!"
 puts "System uptime is [::ex::uptime_seconds] seconds."
 ```
 
-should produce output:
+should produce output like:
 
 ```
 Hello, world on x86_64!
