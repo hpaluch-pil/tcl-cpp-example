@@ -1,4 +1,4 @@
-// tcl_ex.c - How to embedd TCL library - example
+// tcl_ex.cpp - How to embed TCL library - example
 
 // EXIT_* constants
 #include <stdlib.h>
@@ -58,7 +58,7 @@ static int UptimeSecondsCmd(
 // add custom commands to Tcl
 static int Ex_ExtendTcl (Tcl_Interp *interp) {
 	// WARNING! Tcl_CreateObjCommand() no longer returns error code - but rather
-	//          commadn token.
+	//          command token.
 	// Original example is wrong at: https://wiki.tcl-lang.org/page/How+to+embed+Tcl+in+C+applications
 	Tcl_CreateObjCommand(
 	        interp, "::ex::uname_machine", UnameMachineCmd, NULL, NULL);
